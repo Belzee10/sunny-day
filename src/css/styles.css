@@ -1,0 +1,143 @@
+/* @import url("https://fonts.googleapis.com/css?family=Quicksand:300,400"); */
+
+body {
+  height: 100%;
+  font-family: "Quicksand", sans-serif;
+  color: #424950;
+  background: linear-gradient(-90deg, #b4cbbc, #f0e7d1);
+  /* background: linear-gradient(-90deg, #ED9E36, rgb(231, 206, 62)); */
+  /* background: linear-gradient(-90deg, #2a3d66, #6f86af); */
+}
+
+h3 {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 22px;
+}
+h5 {
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-size: 18px;
+}
+.card-container {
+  padding-top: 3rem;
+}
+.card {
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 0 50px 2px #1b1b1b83;
+}
+.card-body {
+  padding: 0;
+}
+.cover {
+  background-image: url("../img/normal.png");
+  /* background-image: url('./cold.jpg'); */
+  /* background-image: url('./hot.jpg'); */
+  background-size: cover;
+}
+.cover .mask {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.993);
+  opacity: 0.1;
+}
+.weather-today span {
+  font-size: 5rem;
+  font-weight: 100;
+}
+.weather-today i {
+  font-size: 2.75rem;
+}
+.choice {
+  padding: 10px;
+}
+.forecast {
+  margin-top: 3rem;
+}
+.forecast span,
+.forecast i {
+  display: block;
+}
+.forecast i {
+  font-size: 28px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.forecast span {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.forecast .col-sm {
+  padding: 10px 1px;
+  border-radius: 2px;
+}
+select.form-control {
+  border-radius: 0;
+  cursor: pointer;
+}
+select option {
+  cursor: pointer;
+}
+select.form-control:focus {
+  border-color: rgb(161, 201, 181);
+  box-shadow: none;
+}
+/* themes */
+.green .color-text {
+  color: #8fb9a5;
+}
+.green .weather-icon {
+  color: rgb(161, 201, 181);
+}
+.green .active {
+  border: 1px solid rgb(215, 233, 221);
+}
+.green select.form-control {
+  border-color: rgb(161, 201, 181);
+}
+.orange .color-text {
+  color: #ed9e36;
+}
+.orange .weather-icon {
+  color: rgb(235, 163, 70);
+}
+.orange .active {
+  border: 1px solid rgb(226, 212, 194);
+}
+.orange select.form-control {
+  border-color: rgb(235, 163, 70);
+}
+.blue .color-text {
+  color: #4766a7;
+}
+.blue .weather-icon {
+  color: #4d6aa7;
+}
+.blue .active {
+  border: 1px solid #c7d0e4;
+}
+.blue select.form-control {
+  border-color: #4d6aa7;
+}
+
+/* media queries */
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+  h3 {
+    font-size: 24px;
+  }
+}
+@media (min-width: 992px) {
+  h3 {
+    font-size: 28px;
+  }
+  .weather-today span {
+    font-size: 7rem;
+  }
+  .weather-today i {
+    font-size: 3.75rem;
+  }
+}
