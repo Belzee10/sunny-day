@@ -8,7 +8,20 @@ import axios from "axios";
 const Api_KEY = "5568bcd46c38ce550618db1995308e5e";
 
 class App extends Component {
-  state = {};
+  state = {
+    currentWeather: {
+      temperature: "",
+      weatherConditions: ""
+    },
+    cities: [
+      { id: "6359304", name: "Madrid", country: "Spain" },
+      { id: "6356055", name: "Barcelona", country: "Spain" },
+      { id: "3553478", name: "Havana", country: "Cuba" },
+      { id: "6167865", name: "Toronto", country: "Canada" },
+      { id: "2643123", name: "Manchester", country: "GB" }
+    ],
+    citySelected: "3553478" //Havana
+  };
 
   getDate() {
     const date = new Date();
@@ -27,27 +40,48 @@ class App extends Component {
       "November",
       "December"
     ];
-    const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    const dayWeek = days[date.getDay()];
-    const month = months[date.getMonth()];
-
-    const now = {
-      day: day,
-      month: month,
-      dayWeek: dayWeek
+    return {
+      day: function() {
+        return (
+          days[date.getDay()] +
+          " " +
+          (date.getDate() < 10 ? "0" + date.getDate() : date.getDate())
+        );
+      },
+      month: function() {
+        return months[date.getMonth()];
+      }
     };
-    return now;
   }
 
-  getWeather() {
+  componentDidMount() {
+    this.getCurrentWeather(this.state.citySelected);
+  }
+
+  handleChange = value => {
+    this.setState({
+      citySelected: value
+    });
+    this.getCurrentWeather(value);
+  };
+
+  getCurrentWeather(cityId) {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=Havana,cu&units=metric&appid=${Api_KEY}`
+        // `https://api.openweathermap.org/data/2.5/forecast?q=Havana,cu&units=metric&appid=${Api_KEY}`//Forecast
+        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${Api_KEY}`
       )
-      .then(function(response) {
-        console.log(response);
+      .then(response => {
+        const data = {
+          temperature: response.data.main.temp,
+          weatherConditions: response.data.weather[0].main
+        };
+        this.setState({
+          currentWeather: data
+        });
+        console.log(this.state.currentWeather, cityId);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -63,18 +97,21 @@ class App extends Component {
                   <div className="col-lg-8 p-5">
                     <div className="row no-gutters">
                       <div className="col">
-                        <button onClick={this.getWeather} className="btn">
-                          GET
-                        </button>
                         <CurrentDate date={this.getDate()} />
                       </div>
                     </div>
                     <div className="row no-gutters">
                       <div className="col-md-6">
-                        <CurrentWeather />
+                        <CurrentWeather
+                          currentWeather={this.state.currentWeather}
+                        />
                       </div>
                       <div className="col-md-6">
-                        <Choice />
+                        <Choice
+                          onChange={this.handleChange}
+                          cities={this.state.cities}
+                          citySelected={this.state.citySelected}
+                        />
                       </div>
                     </div>
                     <div className="row no-gutters">
