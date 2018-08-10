@@ -4,7 +4,7 @@ body {
   height: 100%;
   font-family: "Quicksand", sans-serif;
   color: #424950;
-  background: linear-gradient(-90deg, #b4cbbc, #f0e7d1);
+  /* background: linear-gradient(-90deg, #b4cbbc, #f0e7d1); */
   /* background: linear-gradient(-90deg, #ED9E36, rgb(231, 206, 62)); */
   /* background: linear-gradient(-90deg, #2a3d66, #6f86af); */
 }
@@ -32,7 +32,7 @@ h5 {
   padding: 0;
 }
 .cover {
-  background-image: url("../img/normal.png");
+  /* background-image: url("../img/normal.png"); */
   /* background-image: url('./cold.jpg'); */
   /* background-image: url('./hot.jpg'); */
   background-size: cover;
