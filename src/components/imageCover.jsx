@@ -1,25 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ImageCover extends Component {
-  handleImageUrl() {
+const ImageCover = props => {
+  function handleImageUrl() {
     let imageUrl = "";
-    const { theme } = this.props;
+    const { theme } = props;
     if (theme === "green") imageUrl = "normal.png";
     else if (theme === "orange") imageUrl = "hot.jpg";
     else if (theme === "blue") imageUrl = "cold.jpg";
     return `url("${process.env.PUBLIC_URL}img/${imageUrl}")`;
   }
-
-  render() {
-    return (
-      <div
-        style={{ backgroundImage: this.handleImageUrl() }}
-        className="col-lg-4 cover"
-      >
-        <div className="mask" />;
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      style={{ backgroundImage: handleImageUrl() }}
+      className="col-lg-4 cover"
+    >
+      <div className="mask" />;
+    </div>
+  );
+};
 
 export default ImageCover;

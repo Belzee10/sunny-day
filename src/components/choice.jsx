@@ -1,31 +1,27 @@
-import React, { Component } from "react";
-class Choice extends Component {
-  state = {};
+import React from "react";
 
-  handleChange = event => {
-    this.props.onChange(event.target.value);
-  };
-
-  render() {
-    return (
-      <div className="choice">
-        <h5>City:</h5>
-        <select
-          value={this.props.citySelected}
-          onChange={this.handleChange}
-          name="city"
-          id="city"
-          className="form-control"
-        >
-          {this.props.cities.map(city => (
-            <option key={city.id} value={city.id}>
-              {city.name}, {city.country}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
+const Choice = props => {
+  function handleChange(event) {
+    props.onChange(event.target.value);
   }
-}
+  return (
+    <div className="choice">
+      <h5>City:</h5>
+      <select
+        value={props.citySelected}
+        onChange={handleChange}
+        name="city"
+        id="city"
+        className="form-control"
+      >
+        {props.cities.map(city => (
+          <option key={city.id} value={city.id}>
+            {city.name}, {city.country}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
 
 export default Choice;

@@ -1,15 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-class IconWeather extends Component {
-  render() {
-    let classes =
-      "wi " + this.iconFormat(this.props.weatherConditions) + " weather-icon";
-
-    return <i className={classes} />;
-  }
-
-  iconFormat(value) {
-    switch (value) {
+const IconWeather = props => {
+  function iconFormat() {
+    switch (props.weatherConditions) {
       case "Clouds":
         return "wi-cloudy";
       case "Clear":
@@ -26,6 +19,8 @@ class IconWeather extends Component {
         return;
     }
   }
-}
+  let classes = `wi ${iconFormat()} weather-icon`;
+  return <i className={classes} />;
+};
 
 export default IconWeather;

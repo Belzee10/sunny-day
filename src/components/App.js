@@ -25,50 +25,19 @@ class App extends Component {
       { id: "6094817", name: "Ottawa", country: "Canada" },
       { id: "3544091", name: "Pinar del Rio", country: "Cuba" }
     ],
-    citySelected: "3553478",
+    citySelected: "3553478", //Havana
     theme: ""
   };
-
-  getDate() {
-    const date = new Date();
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-    return {
-      day: function() {
-        return (
-          days[date.getDay()] +
-          " " +
-          (date.getDate() < 10 ? "0" + date.getDate() : date.getDate())
-        );
-      },
-      month: function() {
-        return months[date.getMonth()];
-      }
-    };
-  }
 
   componentDidMount() {
     this.getCurrentWeather(this.state.citySelected);
   }
 
-  handleChange = value => {
+  handleChange = city => {
     this.setState({
-      citySelected: value
+      citySelected: city
     });
-    this.getCurrentWeather(value);
+    this.getCurrentWeather(city);
   };
 
   handleTheme() {
@@ -99,15 +68,14 @@ class App extends Component {
         `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${Api_KEY}`
       )
       .then(response => {
-        const data = {
+        const currentWeather = {
           temperature: response.data.main.temp,
           weatherConditions: response.data.weather[0].main
         };
         this.setState({
-          currentWeather: data
+          currentWeather
         });
         this.handleTheme();
-        console.log(this.state.currentWeather, cityId);
       })
       .catch(error => {
         console.log(error);
@@ -125,7 +93,7 @@ class App extends Component {
                   <div className="col-lg-8 p-5">
                     <div className="row no-gutters">
                       <div className="col">
-                        <CurrentDate date={this.getDate()} />
+                        <CurrentDate />
                       </div>
                     </div>
                     <div className="row no-gutters">
