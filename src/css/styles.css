@@ -9,7 +9,7 @@ body {
   /* background: linear-gradient(-90deg, #2a3d66, #6f86af); */
 }
 
-h3 {
+.date span {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -126,12 +126,12 @@ select.form-control:focus {
 @media (min-width: 576px) {
 }
 @media (min-width: 768px) {
-  h3 {
+  .date span {
     font-size: 24px;
   }
 }
 @media (min-width: 992px) {
-  h3 {
+  .date span {
     font-size: 28px;
   }
   .weather-today span {

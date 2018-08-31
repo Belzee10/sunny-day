@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Day from "./day";
+import ForecastDay from "./forecastDay";
 
 class Forecast extends Component {
   state = {};
@@ -7,7 +7,15 @@ class Forecast extends Component {
     return (
       <div className="forecast">
         <div className="row no-gutters">
-          <Day />
+          {this.props.forecastWeather.map((forecast, index) => (
+            <ForecastDay
+              temperature={forecast.temperature}
+              weatherConditions={forecast.weatherConditions}
+              date={forecast.date}
+              key={index}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     );

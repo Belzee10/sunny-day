@@ -14,7 +14,7 @@ const ImageCover = props => {
       style={{ backgroundImage: handleImageUrl() }}
       className="col-lg-4 cover"
     >
-      <div className="mask" />;
+      <div className="mask" />
     </div>
   );
 };

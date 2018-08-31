@@ -10,10 +10,15 @@ const Api_KEY = "5568bcd46c38ce550618db1995308e5e";
 
 class App extends Component {
   state = {
+    cityCode: "3553478", //Havana by default
     currentWeather: {
       temperature: 0,
-      weatherConditions: ""
+      weatherConditions: "",
+      date: "",
+      description: ""
     },
+    forecastWeather: [],
+    theme: "",
     cities: [
       { id: "6359304", name: "Madrid", country: "Spain" },
       { id: "6356055", name: "Barcelona", country: "Spain" },
@@ -24,20 +29,40 @@ class App extends Component {
       { id: "2950158", name: "Berlin", country: "Germany" },
       { id: "6094817", name: "Ottawa", country: "Canada" },
       { id: "3544091", name: "Pinar del Rio", country: "Cuba" }
-    ],
-    citySelected: "3553478", //Havana
-    theme: ""
+    ]
   };
 
   componentDidMount() {
-    this.getCurrentWeather(this.state.citySelected);
+    this.getCurrentWeather(this.state.cityCode);
+    this.getForecastWeather(this.state.cityCode);
+  }
+
+  handleForecast(data) {
+    const forecastWeather = [];
+    //loop through the data of forecast to get the days(+5 days)
+    for (let index = 6; index < data.length; index += 8) {
+      const weatherDay = {
+        temperature: data[index].main.temp,
+        weatherConditions: data[index].weather[0].main,
+        date: this.handleDate(data[index].dt_txt)
+      };
+      forecastWeather.push(weatherDay);
+    }
+    forecastWeather.unshift(this.state.currentWeather);
+    return forecastWeather;
+  }
+
+  handleDate(dateString) {
+    const date = new Date(dateString).toString().split(" ");
+    return date;
   }
 
   handleChange = city => {
     this.setState({
-      citySelected: city
+      cityCode: city
     });
     this.getCurrentWeather(city);
+    this.getForecastWeather(city);
   };
 
   handleTheme() {
@@ -64,18 +89,35 @@ class App extends Component {
   getCurrentWeather(cityId) {
     axios
       .get(
-        // `https://api.openweathermap.org/data/2.5/forecast?q=Havana,cu&units=metric&appid=${Api_KEY}`//Forecast
         `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${Api_KEY}`
       )
       .then(response => {
         const currentWeather = {
           temperature: response.data.main.temp,
-          weatherConditions: response.data.weather[0].main
+          weatherConditions: response.data.weather[0].main,
+          date: this.handleDate(new Date()),
+          description: response.data.weather[0].description
         };
         this.setState({
           currentWeather
         });
         this.handleTheme();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  getForecastWeather(cityId) {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&units=metric&appid=${Api_KEY}`
+      )
+      .then(response => {
+        const forecastWeather = this.handleForecast(response.data.list);
+        this.setState({
+          forecastWeather
+        });
       })
       .catch(error => {
         console.log(error);
@@ -93,7 +135,7 @@ class App extends Component {
                   <div className="col-lg-8 p-5">
                     <div className="row no-gutters">
                       <div className="col">
-                        <CurrentDate />
+                        <CurrentDate date={this.handleDate(new Date())} />
                       </div>
                     </div>
                     <div className="row no-gutters">
@@ -106,13 +148,15 @@ class App extends Component {
                         <Choice
                           onChange={this.handleChange}
                           cities={this.state.cities}
-                          citySelected={this.state.citySelected}
+                          citySelected={this.state.cityCode}
                         />
                       </div>
                     </div>
                     <div className="row no-gutters">
                       <div className="col">
-                        <Forecast />
+                        <Forecast
+                          forecastWeather={this.state.forecastWeather}
+                        />
                       </div>
                     </div>
                   </div>

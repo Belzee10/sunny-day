@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Day extends Component {
-  state = {};
-  render() {
-    return (
-      <div className="col-sm text-center">
-        <span>MON</span>
-        <i className="wi wi-night-alt-sleet weather-icon" />
-        <span>13˚</span>
-      </div>
-    );
-  }
-}
+const Day = props => {
+  const spanStyle = {
+    paddingLeft: "1rem"
+  };
+  return (
+    <span style={spanStyle}>
+      {props.day < 10 ? "0" + props.day : props.day}
+    </span>
+  );
+};
 
 export default Day;

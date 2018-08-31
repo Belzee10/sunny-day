@@ -1,40 +1,14 @@
 import React from "react";
+import Day from "./day";
+import WeekDay from "./weekDay";
+import Month from "./month";
 
-const CurrentDate = () => {
-  function getDate() {
-    const date = new Date();
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-    return {
-      day: function() {
-        return (
-          days[date.getDay()] +
-          " " +
-          (date.getDate() < 10 ? "0" + date.getDate() : date.getDate())
-        );
-      },
-      month: function() {
-        return months[date.getMonth()];
-      }
-    };
-  }
+const CurrentDate = props => {
   return (
     <div className="date">
-      <h3>{getDate().day()}</h3>
-      <h3>{getDate().month()}</h3>
+      <WeekDay weekDay={props.date[0]} />
+      <Day day={props.date[2]} />
+      <Month month={props.date[1]} />
     </div>
   );
 };
