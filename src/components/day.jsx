@@ -4,11 +4,7 @@ const Day = props => {
   const spanStyle = {
     paddingLeft: "1rem"
   };
-  return (
-    <span style={spanStyle}>
-      {props.day < 10 ? "0" + props.day : props.day}
-    </span>
-  );
+  return <span style={spanStyle}>{props.day}</span>;
 };
 
 export default Day;

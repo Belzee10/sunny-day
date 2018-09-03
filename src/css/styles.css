@@ -4,11 +4,7 @@ body {
   height: 100%;
   font-family: "Quicksand", sans-serif;
   color: #424950;
-  /* background: linear-gradient(-90deg, #b4cbbc, #f0e7d1); */
-  /* background: linear-gradient(-90deg, #ED9E36, rgb(231, 206, 62)); */
-  /* background: linear-gradient(-90deg, #2a3d66, #6f86af); */
 }
-
 .date span {
   font-weight: 400;
   text-transform: uppercase;
@@ -24,6 +20,7 @@ h5 {
   padding-top: 3rem;
 }
 .card {
+  position: relative;
   border: none;
   border-radius: 0;
   box-shadow: 0 0 50px 2px #1b1b1b83;

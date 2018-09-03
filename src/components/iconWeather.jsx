@@ -15,6 +15,8 @@ const IconWeather = props => {
         return "wi-rain";
       case "Snow":
         return "wi-snow";
+      case "Mist":
+        return "wi-fog";
       default:
         return;
     }

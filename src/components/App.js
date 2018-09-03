@@ -5,17 +5,20 @@ import Choice from "./choice";
 import Forecast from "./forecast";
 import ImageCover from "./imageCover";
 import axios from "axios";
+import { css } from "react-emotion";
+import { ClipLoader } from "react-spinners";
 
 const Api_KEY = "5568bcd46c38ce550618db1995308e5e";
 
 class App extends Component {
   state = {
+    loading: true,
+    loadingForecast: true,
     cityCode: "3553478", //Havana by default
     currentWeather: {
       temperature: 0,
       weatherConditions: "",
-      date: "",
-      description: ""
+      date: ""
     },
     forecastWeather: [],
     theme: "",
@@ -59,7 +62,9 @@ class App extends Component {
 
   handleChange = city => {
     this.setState({
-      cityCode: city
+      cityCode: city,
+      loading: true,
+      loadingForecast: true
     });
     this.getCurrentWeather(city);
     this.getForecastWeather(city);
@@ -95,11 +100,11 @@ class App extends Component {
         const currentWeather = {
           temperature: response.data.main.temp,
           weatherConditions: response.data.weather[0].main,
-          date: this.handleDate(new Date()),
-          description: response.data.weather[0].description
+          date: this.handleDate(new Date())
         };
         this.setState({
-          currentWeather
+          currentWeather,
+          loading: false
         });
         this.handleTheme();
       })
@@ -116,7 +121,8 @@ class App extends Component {
       .then(response => {
         const forecastWeather = this.handleForecast(response.data.list);
         this.setState({
-          forecastWeather
+          forecastWeather,
+          loadingForecast: false
         });
       })
       .catch(error => {
@@ -125,11 +131,27 @@ class App extends Component {
   }
 
   render() {
+    const override = css`
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    `;
     return (
       <div className="container">
         <div className="row">
           <div className="col card-container">
             <div className="card">
+              {this.state.loading &&
+                this.state.loadingForecast && (
+                  <ClipLoader
+                    className={override}
+                    sizeUnit={"px"}
+                    size={20}
+                    color={"#424950"}
+                    loading={this.state.loading}
+                  />
+                )}
+
               <div className={"card-body " + this.state.theme}>
                 <div className="row no-gutters">
                   <div className="col-lg-8 p-5">
