@@ -3,7 +3,6 @@
 **Sunny-Day** is a Weather APP made with React.js
 
 #### Features:
-
 - Current weather of the predetermined city(Havana, Cuba).
 - +5 days forecast weather.
 - Theme color change depend of temperature.
@@ -11,7 +10,6 @@
 All data is getting from: `https://openweathermap.org/` API using **Axios**.
 
 #### How to run:
-
 - Clone: `https://github.com/Belzee10/sunny-day.git`
 - Go to the directory and run: `npm install`
 - Now run: `npm start`
