@@ -4,6 +4,7 @@ import CurrentWeather from "./currentWeather";
 import Choice from "./choice";
 import Forecast from "./forecast";
 import ImageCover from "./imageCover";
+import Cities from "./cities";
 import axios from "axios";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
@@ -21,18 +22,7 @@ class App extends Component {
       date: ""
     },
     forecastWeather: [],
-    theme: "",
-    cities: [
-      { id: "6359304", name: "Madrid", country: "Spain" },
-      { id: "6356055", name: "Barcelona", country: "Spain" },
-      { id: "3553478", name: "Havana", country: "Cuba" },
-      { id: "6167865", name: "Toronto", country: "Canada" },
-      { id: "2643123", name: "Manchester", country: "GB" },
-      { id: "3435910", name: "Buenos Aires", country: "Argentina" },
-      { id: "2950158", name: "Berlin", country: "Germany" },
-      { id: "6094817", name: "Ottawa", country: "Canada" },
-      { id: "3544091", name: "Pinar del Rio", country: "Cuba" }
-    ]
+    theme: ""
   };
 
   componentDidMount() {
@@ -169,7 +159,7 @@ class App extends Component {
                       <div className="col-md-6">
                         <Choice
                           onChange={this.handleChange}
-                          cities={this.state.cities}
+                          cities={Cities}
                           citySelected={this.state.cityCode}
                         />
                       </div>
