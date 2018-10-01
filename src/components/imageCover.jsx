@@ -2,12 +2,12 @@ import React from "react";
 
 const ImageCover = props => {
   function handleImageUrl() {
-    let imageUrl = "";
+    let imageName = "";
     const { theme } = props;
-    if (theme === "green") imageUrl = "normal.png";
-    else if (theme === "orange") imageUrl = "hot.jpg";
-    else if (theme === "blue") imageUrl = "cold.jpg";
-    return `url("${process.env.PUBLIC_URL}img/${imageUrl}")`;
+    if (theme === "green") imageName = "normal.png";
+    else if (theme === "orange") imageName = "hot.jpg";
+    else if (theme === "blue") imageName = "cold.jpg";
+    return `url("${process.env.PUBLIC_URL}/img/${imageName}")`;
   }
   return (
     <div
