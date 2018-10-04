@@ -4,7 +4,7 @@ import CurrentWeather from "./currentWeather";
 import Choice from "./choice";
 import Forecast from "./forecast";
 import ImageCover from "./imageCover";
-import Cities from "./cities";
+import Cities from "../cities";
 import axios from "axios";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";

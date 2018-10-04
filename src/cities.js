@@ -20,7 +20,7 @@ const cities = [
   {
     id: 2643743,
     name: "London",
-    country: "Great Bretain",
+    country: "Great Britain",
     coord: {
       lon: -0.12574,
       lat: 51.50853
